@@ -20,7 +20,7 @@ public class UserController {
     public String signup(){return "signup";}
     @PostMapping("/new")
     public String signup(@Valid UserDto userDto){
-        return"";
+        userService.newUser(userDto);
+        return"index";
     }
-
 }

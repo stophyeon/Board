@@ -1,13 +1,11 @@
 package com.example.board.service;
 
-import com.example.board.annotation.TimeCheck;
-import com.example.board.domain.User;
+import com.example.board.aop.TimeCheck;
 import com.example.board.dto.UserDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class UserServiceTest {
 

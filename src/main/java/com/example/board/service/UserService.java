@@ -1,6 +1,6 @@
 package com.example.board.service;
 
-import com.example.board.annotation.TimeCheck;
+import com.example.board.aop.TimeCheck;
 import com.example.board.domain.User;
 import com.example.board.dto.UserDto;
 import com.example.board.repository.UserRepository;

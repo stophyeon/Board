@@ -23,4 +23,9 @@ public class UserController {
         userService.newUser(userDto);
         return"index";
     }
+    @PostMapping("/")
+    public String login(UserDto userDto){
+
+        return "index";
+    }
 }

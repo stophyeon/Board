@@ -14,7 +14,15 @@ class UserServiceTest {
     @Test
     @TimeCheck
     void newUser() {
-        UserDto userDto = new UserDto("jjh","12345678","jj6778@naver.com");
+        UserDto userDto = new UserDto("jjh","12345678","jj1234@naver.com");
         userService.newUser(userDto);
+    }
+    @Test
+    @TimeCheck
+    void joinUser() {
+        UserDto userDto = new UserDto("jjh","12345678","jj1234@naver.com");
+        userService.findOne("jj1234@naver.com");
+        System.out.println(userService.joinUser(userDto.getEmail(),"123456789"));
+
     }
 }

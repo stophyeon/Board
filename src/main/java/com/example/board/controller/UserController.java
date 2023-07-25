@@ -23,9 +23,10 @@ public class UserController {
         userService.newUser(userDto);
         return"index";
     }
-    @PostMapping("/")
+    @PostMapping("")
     public String login(UserDto userDto){
-
-        return "index";
+        if (userService.joinUser(userDto.getEmail(),userDto.getPassword())==true)
+        {return "home";}
+        else{return"redirect:/";}
     }
 }

@@ -16,8 +16,8 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public void newPost(PostDto postDto,User user){
-        Post post=new Post(postDto,user);
+    public void newPost(PostDto postDto){
+        Post post=new Post(postDto);
         postRepository.save(post);
     }
     public Optional<Post> getPostByTitle(String title){

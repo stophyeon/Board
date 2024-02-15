@@ -26,35 +26,30 @@ public class UserService {
     @TimeCheck
     public void newUser(UserDto userDto) {
         User user = new User(userDto);
-        if (Duplicate(userDto)==false){userRepository.save(user);}
+        if (!Duplicate(userDto)){userRepository.save(user);}
         else{log.info("이미가입된어있습니다");}
 
     }
     public boolean Duplicate(UserDto userDto){
         Optional<User> user = userRepository.findByEmailAndPassword(userDto.getEmail(),userDto.getPassword());
-        if (user.isEmpty()){return false;}
-        else {return true;}
+        return user.isPresent();
     }
 
-    public Optional<User> findOne(String email){
-        Optional<User> user =userRepository.findByEmail(email);
-        return user;
-    }
+
     @TimeCheck
     public boolean joinUser(String email,String password) {
         return userRepository.findByEmailAndPassword(email,password).isPresent();
     }
-    @TimeCheck
-    @Transactional
-    public List<Post> getPost(String name){
-        List<Post> posts = new ArrayList<>();
-        List<User> user = userRepository.findFirst3ByUserName(name);
-        user.forEach(u->{
-            u.getMyBoards().forEach(p->{
-                posts.add(p);}
-            );}
-        );
-        return posts;
-    }
+//    @TimeCheck
+//    @Transactional
+//    public List<Post> getPost(String name){
+//        List<Post> posts = new ArrayList<>();
+//        List<User> user = userRepository.findFirst3ByUserName(name);
+//        user.forEach(u->{
+//                    posts.addAll(u.getMyBoards());
+//                }
+//        );
+//        return posts;
+//    }
 
 }

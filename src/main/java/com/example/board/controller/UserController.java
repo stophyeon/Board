@@ -21,12 +21,13 @@ public class UserController {
     @PostMapping("/new")
     public String signup(@Valid UserDto userDto){
         userService.newUser(userDto);
-        return"index";
+        return "index";
     }
     @PostMapping("")
     public String login(UserDto userDto){
-        if (userService.joinUser(userDto.getEmail(),userDto.getPassword())==true)
+        if (userService.joinUser(userDto.getEmail(), userDto.getPassword()))
         {return "home";}
         else{return"redirect:/";}
     }
+
 }

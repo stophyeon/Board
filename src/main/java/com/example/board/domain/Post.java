@@ -18,17 +18,17 @@ public class Post {
     private Long board_Id;
     private String title;
     private String content;
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "userId")
+//    private User user;
 
     public Post(String title,String content){
         this.title=title;
         this.content=content;}
 
-    public Post(PostDto postDto, User user) {
+    public Post(PostDto postDto) {
         this.title = postDto.getTitle();
         this.content = postDto.getContent();
-        this.user = user;
+        //this.user = user;
     }
 }

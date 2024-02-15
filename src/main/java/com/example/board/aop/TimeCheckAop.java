@@ -16,7 +16,7 @@ public class TimeCheckAop {
         Long start = System.currentTimeMillis();
         Object proceed=joinPoint.proceed();
         Long end = System.currentTimeMillis();
-        Long result = end-start;
+        long result = end-start;
         System.out.println("실행시간"+result+"ms");
         return proceed;
     }

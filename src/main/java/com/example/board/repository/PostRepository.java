@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post,Long> {
 
     Optional<Post> findByTitle(String title);
-    List<Post> findByUser(User user);
+    //List<Post> findByUser(User user);
 }

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://thymeleaf.org">
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
 <div sec:authentication="name"></div>
+<div th:text=${posts.title}></div>
+<div th:text=${posts.content}></div>
 <a href="/board/post/new">글쓰기</a>
 
 </body>

@@ -23,13 +23,10 @@ public class PostController {
     @GetMapping("/new")
     public String write(){return "board";}
     @PostMapping("/new")
-    public String writePost(@Valid PostDto postDto){
+    public String writePost(@Valid PostDto postDto,Model model){
         postService.newPost(postDto);
+        model.addAttribute("posts",userService.myPost());
         return "home";
     }
-//    @PostMapping("/search")
-//    public String showPosts(String name, Model model){
-//        model.addAllAttributes(userService.getPost(name));
-//        return "posts";
-//    }
+
 }

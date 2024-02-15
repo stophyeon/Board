@@ -3,10 +3,13 @@ package com.example.board.service;
 import com.example.board.aop.TimeCheck;
 import com.example.board.domain.Post;
 import com.example.board.domain.User;
+import com.example.board.domain.UserSec;
 import com.example.board.dto.UserDto;
 import com.example.board.repository.PostRepository;
 import com.example.board.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,16 +50,13 @@ public class UserService {
     public boolean joinUser(String email,String password) {
         return userRepository.findByEmailAndPassword(email,password).isPresent();
     }
-//    @TimeCheck
-//    @Transactional
-//    public List<Post> getPost(String name){
-//        List<Post> posts = new ArrayList<>();
-//        List<User> user = userRepository.findFirst3ByUserName(name);
-//        user.forEach(u->{
-//                    posts.addAll(u.getMyBoards());
-//                }
-//        );
-//        return posts;
-//    }
+    @Transactional
+    @TimeCheck
+    public Post myPost(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserSec user = (UserSec) authentication.getPrincipal();
+        User user1 = userRepository.findByEmail(user.getUsername()).get();
+        return postRepository.findFirstByUser(user1).get();
+    }
 
 }

@@ -7,6 +7,7 @@ import com.example.board.dto.UserDto;
 import com.example.board.repository.PostRepository;
 import com.example.board.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,14 +19,20 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
-    public UserService(UserRepository userRepository, PostRepository postRepository) {
+    private final PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository, PostRepository postRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @TimeCheck
     public void newUser(UserDto userDto) {
-        User user = new User(userDto);
+        User user = User.builder()
+                .userName(userDto.getUserName())
+                .email(userDto.getEmail())
+                .password(passwordEncoder.encode(userDto.getPassword()))
+                .build();
         if (!Duplicate(userDto)){userRepository.save(user);}
         else{log.info("이미가입된어있습니다");}
 

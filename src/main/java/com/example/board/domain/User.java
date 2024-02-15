@@ -2,6 +2,7 @@ package com.example.board.domain;
 
 import com.example.board.dto.UserDto;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -21,10 +22,11 @@ public class User{
     private String email;
     @OneToMany(mappedBy = "user")
     List<Post> myBoards;
-
-    public User(UserDto userDto){
-        this.userName=userDto.getUserName();
-        this.email=userDto.getEmail();
-        this.password=userDto.getPassword();
+    @Builder
+    public User(String userName,String password,String email){
+        this.userName=userName;
+        this.password=password;
+        this.email=email;
     }
+
 }

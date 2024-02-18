@@ -37,11 +37,11 @@ public class UserService {
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .build();
         if (!Duplicate(userDto)){userRepository.save(user);}
-        else{log.info("이미가입된어있습니다");}
+        else{log.info("이미가입되어있습니다");}
 
     }
     public boolean Duplicate(UserDto userDto){
-        Optional<User> user = userRepository.findByEmailAndPassword(userDto.getEmail(),userDto.getPassword());
+        Optional<User> user = userRepository.findByEmail(userDto.getEmail());
         return user.isPresent();
     }
 
@@ -59,6 +59,7 @@ public class UserService {
         List<Post> posts = new ArrayList<>();
         if (postRepository.findByUser(user1).isPresent()){
              posts=postRepository.findByUser(user1).get();
+             log.info(posts.get(0).getUser().getUserName());
         }
 
         return posts;

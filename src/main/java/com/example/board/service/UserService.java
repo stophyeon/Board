@@ -52,11 +52,16 @@ public class UserService {
     }
     @Transactional
     @TimeCheck
-    public Post myPost(){
+    public List<Post> myPost(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserSec user = (UserSec) authentication.getPrincipal();
         User user1 = userRepository.findByEmail(user.getUsername()).get();
-        return postRepository.findFirstByUser(user1).get();
+        List<Post> posts = new ArrayList<>();
+        if (postRepository.findByUser(user1).isPresent()){
+             posts=postRepository.findByUser(user1).get();
+        }
+
+        return posts;
     }
 
 }

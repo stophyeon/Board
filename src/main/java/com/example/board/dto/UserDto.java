@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDto {
     private String userName;
-    @Min(7)
+
     private String password;
     @Email
     private String email;

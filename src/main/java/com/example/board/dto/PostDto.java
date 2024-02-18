@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostDto {
-    @Min(6)
+
     String title;
     String content;
 

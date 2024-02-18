@@ -18,7 +18,7 @@ public class Post {
     private Long board_Id;
     private String title;
     private String content;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
 
@@ -26,7 +26,7 @@ public class Post {
         this.title=title;
         this.content=content;}
 
-    public Post(PostDto postDto, User user) {
+    public Post(PostDto postDto,User user) {
         this.title = postDto.getTitle();
         this.content = postDto.getContent();
         this.user = user;

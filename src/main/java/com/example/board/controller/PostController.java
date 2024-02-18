@@ -6,9 +6,7 @@ import com.example.board.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/board/post")
@@ -23,13 +21,14 @@ public class PostController {
     @GetMapping("/new")
     public String write(){return "board";}
     @PostMapping("/new")
-    public String writePost(@Valid PostDto postDto){
-       // postService.newPost(postDto);
+    public String writePost(@Valid PostDto postDto,Model model){
+        postService.newPost(postDto);
+        model.addAttribute("posts",userService.myPost());
         return "home";
     }
-    @PostMapping("/search")
-    public String showPosts(String name, Model model){
-        model.addAllAttributes(userService.getPost(name));
-        return "posts";
+    @GetMapping("/del")
+    public String delPost(@RequestParam("id") String id){
+        postService.erasePost(Long.parseLong(id));
+        return "redirect:/board/user/home";
     }
 }
